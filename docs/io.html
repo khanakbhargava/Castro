@@ -415,39 +415,43 @@ defined in the network)</p></td>
 <span class="math notranslate nohighlight">\(\omegadot_k = DX_k/Dt\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm s^{-1}}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rho_enuc</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">enuc</span></code></p></td>
+<td><p>Nuclear energy generation rate / gram</p></td>
+<td><p><span class="math notranslate nohighlight">\({\rm erg~g^{-1}~s^{-1}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rho_enuc</span></code></p></td>
 <td><p>Nuclear energy generation rate density</p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm erg~cm^{-3}~s^{-1}}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phiGrav</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">phiGrav</span></code></p></td>
 <td><p>Gravitational potential</p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm erg~g^{-1}}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grav_x</span></code>, <code class="docutils literal notranslate"><span class="pre">grav_y</span></code>,
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">grav_x</span></code>, <code class="docutils literal notranslate"><span class="pre">grav_y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">grav_z</span></code></p></td>
 <td><p>Gravitational acceleration</p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm cm~s^{-2}}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rmom</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rmom</span></code></p></td>
 <td><p>Radial momentum (defined for
 <code class="docutils literal notranslate"><span class="pre">HYBRID_MOMENTUM</span></code>)</p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm g~cm^{-2}~s^{-1}}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lmom</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lmom</span></code></p></td>
 <td><p>Angular momentum (<span class="math notranslate nohighlight">\(\theta\)</span>; defined for
 <code class="docutils literal notranslate"><span class="pre">HYBRID_MOMENTUM</span></code>)</p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm g~cm^{-2}~s^{-1}}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pmom</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pmom</span></code></p></td>
 <td><p>z-momentum (defined for <code class="docutils literal notranslate"><span class="pre">HYBRID_MOMENTUM</span></code>)</p></td>
 <td><p><span class="math notranslate nohighlight">\({\rm g~cm^{-2}~s^{-1}}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Shock</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Shock</span></code></p></td>
 <td><p>Shock flag (= 1 if a zone has a shock;
 defined for <code class="docutils literal notranslate"><span class="pre">SHOCK</span></code>)</p></td>
 <td><p>–</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rad</span></code>, <code class="docutils literal notranslate"><span class="pre">rad0</span></code>, <code class="docutils literal notranslate"><span class="pre">rad1</span></code>,
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rad</span></code>, <code class="docutils literal notranslate"><span class="pre">rad0</span></code>, <code class="docutils literal notranslate"><span class="pre">rad1</span></code>,
 …</p></td>
 <td><p>Radiation energy density
 (for multigroup radiation, each group has its
@@ -650,17 +654,11 @@ speed</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">dervel</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\cms\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">enuc</span></code></p></td>
-<td><p>Nuclear energy generation rate / gram</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">derenuc</span></code></p></td>
-<td><p><span class="math notranslate nohighlight">\({\rm erg~g^{-1}~s^{-1}}\)</span></p></td>
-</tr>
 </tbody>
 </table>
 </section>
 <section id="problem-specific-plotfile-variables">
 <h3>problem-specific plotfile variables<a class="headerlink" href="#problem-specific-plotfile-variables" title="Link to this heading"></a></h3>
-<p>See the section on <a class="reference internal" href="creating_a_problem.html#problem-derives"><span class="std std-ref">Problem_Derives.H</span></a> for more details about defining your own plotfile variables.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>variable name</p></th>
@@ -851,14 +849,7 @@ includes the gravitational wave amplitudes</p></li>
 </li>
 </ul>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">Castro/Util/scripts/diag_parser.py</span></code> contains Python code for parsing
-these output files into Numpy arrays.  Usage instructions are included
-in the file, along with an example script at
-<code class="docutils literal notranslate"><span class="pre">Castro/Util/scripts/plot_species.py</span></code>.  This reads a
-<code class="docutils literal notranslate"><span class="pre">species_diag.out</span></code> file provided on the command line and makes a plot
-of the total mass fractions over time.</p>
-<p>Some problems have custom versions of the diagnostics with additional
-information.  These are not currently supported by the Python parser.</p>
+<p>Some problems have custom versions of the diagnostics with additional information.</p>
 </section>
 <section id="parallel-i-o">
 <span id="sec-parallel-io"></span><h2>Parallel I/O<a class="headerlink" href="#parallel-i-o" title="Link to this heading"></a></h2>
