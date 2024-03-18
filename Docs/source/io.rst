@@ -271,8 +271,6 @@ radiation quantities).
 | (where X is any of the species    | :math:`\omegadot_k = DX_k/Dt`                     |                                      |
 | defined in the network)           |                                                   |                                      |
 +-----------------------------------+---------------------------------------------------+--------------------------------------+
-| ``enuc``                          | Nuclear energy generation rate / gram             | :math:`{\rm erg~g^{-1}~s^{-1}}`      |
-+-----------------------------------+---------------------------------------------------+--------------------------------------+
 | ``rho_enuc``                      | Nuclear energy generation rate density            | :math:`{\rm erg~cm^{-3}~s^{-1}}`     |
 +-----------------------------------+---------------------------------------------------+--------------------------------------+
 | ``phiGrav``                       | Gravitational potential                           | :math:`{\rm erg~g^{-1}}`             |
@@ -393,10 +391,13 @@ Derived variables
 | ``y_velocity``,                   | :math:`\ub = (\rho \ub)/\rho`                     |                             |                                         |
 | ``z_velocity``                    |                                                   |                             |                                         |
 +-----------------------------------+---------------------------------------------------+-----------------------------+-----------------------------------------+
-
+| ``enuc``                          | Nuclear energy generation rate / gram             | ``derenuc``                 | :math:`{\rm erg~g^{-1}~s^{-1}}`         |
++-----------------------------------+---------------------------------------------------+-----------------------------+-----------------------------------------+
 
 problem-specific plotfile variables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See the section on :ref:`Problem_Derives.H <problem_derives>` for more details about defining your own plotfile variables.
 
 +-----------------------------------+---------------------------------------------------+--------------------------------------+
 | variable name                     | description                                       | units                                |
@@ -562,7 +563,15 @@ By default, 4 output files are created:
 
        The species masses are given in units of solar masses.
 
-Some problems have custom versions of the diagnostics with additional information.
+``Castro/Util/scripts/diag_parser.py`` contains Python code for parsing
+these output files into Numpy arrays.  Usage instructions are included
+in the file, along with an example script at
+``Castro/Util/scripts/plot_species.py``.  This reads a
+``species_diag.out`` file provided on the command line and makes a plot
+of the total mass fractions over time.
+
+Some problems have custom versions of the diagnostics with additional
+information.  These are not currently supported by the Python parser.
 
 
 .. _sec:parallel_io:
