@@ -22,7 +22,7 @@ constexpr int dg2 = 1;
 #endif
 
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-constexpr int upassmap (int ipassive)
+int upassmap (int ipassive)
 {
     if (ipassive < NumAdv) {
         // passive is one of the advected quantities
@@ -40,7 +40,7 @@ constexpr int upassmap (int ipassive)
 }
 
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-constexpr int qpassmap (int ipassive)
+int qpassmap (int ipassive)
 {
     if (ipassive < NumAdv) {
         // passive is one of the advected quantities

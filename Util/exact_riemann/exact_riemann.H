@@ -1,15 +1,11 @@
 #ifndef EXACT_RIEMANN_H
 #define EXACT_RIEMANN_H
 
-#include <AMReX_REAL.H>
-
 #include <fstream>
 
 #include <riemann_sample.H>
 #include <riemann_star_state.H>
 #include <riemann_support.H>
-
-using namespace amrex::literals;
 
 AMREX_INLINE
 void
@@ -19,7 +15,7 @@ exact_riemann() {
     // exploring composition jumps here.  We'll take a constant
     // composition.
 
-    amrex::Real xn[NumSpec] = {0.0};
+    Real xn[NumSpec] = {0.0};
     xn[0] = 1.0_rt;
 
 
@@ -48,12 +44,12 @@ exact_riemann() {
     }
 
     if (problem::co_moving_frame) {
-        amrex::Real W_avg = 0.5_rt * (problem::u_l + problem::u_r);
+        Real W_avg = 0.5_rt * (problem::u_l + problem::u_r);
         problem::u_l -= W_avg;
         problem::u_r -= W_avg;
     }
 
-    amrex::Real ustar, pstar, W_l, W_r;
+    Real ustar, pstar, W_l, W_r;
 
     riemann_star_state(problem::rho_l, problem::u_l, problem::p_l, xn,
                        problem::rho_r, problem::u_r, problem::p_r, xn,
@@ -66,7 +62,7 @@ exact_riemann() {
 
     // This follows from the discussion around C&G Eq. 15
 
-    amrex::Real dx = (problem::xmax - problem::xmin) / static_cast<amrex::Real>(problem::npts);
+    Real dx = (problem::xmax - problem::xmin) / static_cast<Real>(problem::npts);
 
     // loop over xi space
 
@@ -76,9 +72,9 @@ exact_riemann() {
 
         // compute xi = x/t -- this is the similarity variable for the
         // solution
-        amrex::Real x  = problem::xmin + (static_cast<amrex::Real>(i) - 0.5_rt) * dx;
+        Real x  = problem::xmin + (static_cast<Real>(i) - 0.5_rt) * dx;
 
-        amrex::Real rho, u, p, xn_s[NumSpec];
+        Real rho, u, p, xn_s[NumSpec];
 
         riemann_sample(problem::rho_l, problem::u_l, problem::p_l, xn,
                        problem::rho_r, problem::u_r, problem::p_r, xn,
@@ -87,7 +83,7 @@ exact_riemann() {
                        rho, u, p, xn_s);
 
         if (problem::co_moving_frame) {
-            amrex::Real W_avg = 0.5_rt * (problem::u_l + problem::u_r);
+            Real W_avg = 0.5_rt * (problem::u_l + problem::u_r);
             u += W_avg;
             x += problem::t * W_avg;
         }

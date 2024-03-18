@@ -10,8 +10,9 @@ def find_r_for_rho(r, rho, rho_want):
     return r[idx]
 
 
-file = "../15m_500_sec.aprox19.hse.5.00km"
-Lx = 8.192e9
+#file = "../15m_500_sec.aprox19.hse.6400"
+file = "../15m_500_sec.aprox19.hse.20.0km"
+Lx = 1.6384e10
 
 data = np.loadtxt(file)
 
@@ -48,8 +49,8 @@ ax = fig.add_subplot(211)
 l1 = ax.plot(data[:,0], data[:,idens], label="density")
 l2 = ax.plot(data[:,0], data[:,itemp], label="temperature")
 
-# show where the refinement kicks in
-rho_refine = 2.e4
+# show where the refinement kicks in 
+rho_refine = 1.e4
 
 r_refine = find_r_for_rho(data[:,0], data[:,idens], rho_refine)
 
@@ -64,10 +65,6 @@ ax.set_yscale("log")
 
 ax.set_xlabel("r [cm]")
 ax.set_ylabel(r"$\rho~[\rm{g/cm^3}]$, $T~[K]$")
-
-ax.set_xlim(None, 5.e10)
-ax.grid(color="b", alpha=0.5, ls=":")
-
 ax2 = ax.twinx()
 
 ax2.set_ylabel(r"$Y_e$")
@@ -77,9 +74,8 @@ l3 = ax2.plot(data[:,0], data[:,iye], color="C2", label="Ye")
 lns = l1 + l2 + l3
 labs = [l.get_label() for l in lns]
 
-ax.legend(lns, labs, frameon=False, loc=6)
+ax.legend(lns, labs, frameon=False)
 
-# species plot
 
 ax = fig.add_subplot(212)
 
@@ -96,17 +92,15 @@ for n, var in enumerate(names):
 
     if Xmax > threshold:
         if Xmax > 0.5:
-            lw = 3
-            ls = "-"
+            lw = 2
         else:
             lw = 1
-            ls = "--"
-        ax.plot(data[:,0], data[:,n], label=var, lw=lw, ls=ls)
+        ax.plot(data[:,0], data[:,n], label=var, lw=lw)
 
 
 ax.axvline(r_refine, color="0.25", ls=":")
 
-ax.axvline(Lx, color="0.5", ls="-")
+ax.axvline(Lx, color="0.25", ls="-")
 
 ax.set_xscale("log")
 ax.set_yscale("log")
@@ -114,16 +108,11 @@ ax.set_yscale("log")
 ax.set_xlabel("r [cm]")
 ax.set_ylabel("mass fraction")
 
-ax.set_xlim(None, 5.e10)
-ax.set_ylim(1.e-6, None)
-
-ax.grid(color="b", alpha=0.5, ls=":")
-
-ax.legend(frameon=True, edgecolor="w", ncol=1, framealpha=0.5)
+ax.legend(frameon=False, fontsize="small", ncol=2)
 
 fig.set_size_inches((8, 12))
 
 fig.tight_layout()
 
-fig.savefig("initial_model.pdf")
+fig.savefig("initial_model.png")
 

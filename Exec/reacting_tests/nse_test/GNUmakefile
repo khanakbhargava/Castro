@@ -11,7 +11,6 @@ USE_MPI    = TRUE
 
 USE_REACT  = TRUE
 
-USE_SIMPLIFIED_SDC := TRUE
 
 CASTRO_HOME ?= ../../..
 

@@ -31,23 +31,23 @@ typedef StateDescriptor::BndryFunc BndryFunc;
 //
 static int scalar_bc[] =
   {
-    amrex::BCType::int_dir, amrex::BCType::ext_dir, amrex::BCType::foextrap, amrex::BCType::reflect_even, amrex::BCType::reflect_even, amrex::BCType::reflect_even
+    INT_DIR, EXT_DIR, FOEXTRAP, REFLECT_EVEN, REFLECT_EVEN, REFLECT_EVEN
   };
 
 static int norm_vel_bc[] =
   {
-    amrex::BCType::int_dir, amrex::BCType::ext_dir, amrex::BCType::foextrap, amrex::BCType::reflect_odd,  amrex::BCType::reflect_odd,  amrex::BCType::reflect_odd
+    INT_DIR, EXT_DIR, FOEXTRAP, REFLECT_ODD,  REFLECT_ODD,  REFLECT_ODD
   };
 
 static int tang_vel_bc[] =
   {
-    amrex::BCType::int_dir, amrex::BCType::ext_dir, amrex::BCType::foextrap, amrex::BCType::reflect_even, amrex::BCType::reflect_even, amrex::BCType::reflect_even
+    INT_DIR, EXT_DIR, FOEXTRAP, REFLECT_EVEN, REFLECT_EVEN, REFLECT_EVEN
   };
 
 #ifdef MHD
-static int mag_field_bc[] =
+static int mag_field_bc[] = 
 {
-  amrex::BCType::int_dir, amrex::BCType::ext_dir, amrex::BCType::foextrap, amrex::BCType::reflect_even, amrex::BCType::foextrap, amrex::BCType::hoextrap
+  INT_DIR, EXT_DIR, FOEXTRAP, REFLECT_EVEN, FOEXTRAP, HOEXTRAP
 };
 #endif
 
@@ -146,11 +146,11 @@ void
 replace_inflow_bc (BCRec& bc)
 {
     for (int dir = 0; dir < AMREX_SPACEDIM; ++dir) {
-        if (bc.lo(dir) == amrex::BCType::ext_dir) {
-            bc.setLo(dir, amrex::BCType::foextrap);
+        if (bc.lo(dir) == EXT_DIR) {
+            bc.setLo(dir, FOEXTRAP);
         }
-        if (bc.hi(dir) == amrex::BCType::ext_dir) {
-            bc.setHi(dir, amrex::BCType::foextrap);
+        if (bc.hi(dir) == EXT_DIR) {
+            bc.setHi(dir, FOEXTRAP);
         }
     }
 }
@@ -204,7 +204,8 @@ Castro::variableSetUp ()
   init_prob_parameters();
 
   // Initialize the runtime parameters for any of the external
-  // microphysics
+  // microphysics (these are the parameters that are in the &extern
+  // block of the probin file)
   extern_init();
 
   // set small positive values of the "small" quantities if they are
@@ -356,7 +357,7 @@ Castro::variableSetUp ()
   store_in_checkpoint = true;
   IndexType xface(IntVect{AMREX_D_DECL(1,0,0)});
   desc_lst.addDescriptor(Mag_Type_x, xface,
-                         StateDescriptor::Point, 0, 1,
+                         StateDescriptor::Point, 0, 1, 
                          interp, state_data_extrap,
                          store_in_checkpoint);
   IndexType yface(IntVect{AMREX_D_DECL(0,1,0)});
@@ -554,7 +555,7 @@ Castro::variableSetUp ()
   bcs[UMUN] = bc;
   name[UMUN] = "mu_n";
 #endif
-
+  
   BndryFunc stateBndryFunc(ca_statefill);
   stateBndryFunc.setRunOnGPU(true);
 
@@ -641,7 +642,7 @@ Castro::variableSetUp ()
   }
 #endif
   // names for the burn_weights that are manually added to the plotfile
-
+  
   if (store_burn_weights) {
 
 #ifdef STRANG
@@ -994,9 +995,9 @@ Castro::variableSetUp ()
   derive_lst.add("Div_B", IndexType::TheCellType(), 1, ca_derdivb, the_same_box);
   derive_lst.addComponent("Div_B", desc_lst, Mag_Type_x, 0, 1);
   derive_lst.addComponent("Div_B", desc_lst, Mag_Type_y, 0, 1);
-  derive_lst.addComponent("Div_B", desc_lst, Mag_Type_z, 0, 1);
-
-#endif
+  derive_lst.addComponent("Div_B", desc_lst, Mag_Type_z, 0, 1); 
+  
+#endif 
 
 
 #if NAUX_NET > 0

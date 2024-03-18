@@ -1,26 +1,22 @@
 #ifndef RIEMANN_SUPPORT_H
 #define RIEMANN_SUPPORT_H
 
-#include <AMReX_REAL.H>
-
 #include <eos_type.H>
 #include <eos.H>
 
-using namespace amrex::literals;
-
-const amrex::Real smallrho = 1.e-5_rt;
+const Real smallrho = 1.e-5_rt;
 const int max_iters = 100;
-const amrex::Real tol = 1.e-6_rt;
+const Real tol = 1.e-6_rt;
 
 
 AMREX_INLINE
 void
-W_s_shock(const amrex::Real W_s, const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real p_s, const amrex::Real e_s, const amrex::Real* xn,
-          amrex::Real& rhostar_s, eos_t& eos_state, amrex::Real& f, amrex::Real& fprime) {
+W_s_shock(const Real W_s, const Real pstar, const Real rho_s, const Real p_s, const Real e_s, const Real* xn,
+          Real& rhostar_s, eos_t& eos_state, Real& f, Real& fprime) {
 
     // we need rhostar -- get it from the R-H conditions
 
-    amrex::Real taustar_s = (1.0_rt / rho_s) - (pstar - p_s) / (W_s * W_s);
+    Real taustar_s = (1.0_rt / rho_s) - (pstar - p_s) / (W_s * W_s);
     rhostar_s = 1.0_rt / taustar_s;
 
     // get the thermodynamics
@@ -40,7 +36,7 @@ W_s_shock(const amrex::Real W_s, const amrex::Real pstar, const amrex::Real rho_
 
     // we need de/drho at constant p -- this is not returned by the EOS
 
-    amrex::Real dedrho_p = eos_state.dedr - eos_state.dedT * eos_state.dpdr / eos_state.dpdT;
+    Real dedrho_p = eos_state.dedr - eos_state.dedT * eos_state.dpdr / eos_state.dpdT;
 
     fprime = 2.0_rt * W_s * (eos_state.e - e_s) - 2.0_rt * dedrho_p * (pstar - p_s) * std::pow(rhostar_s, 2) / W_s;
 
@@ -49,8 +45,8 @@ W_s_shock(const amrex::Real W_s, const amrex::Real pstar, const amrex::Real rho_
 
 AMREX_INLINE
 void
-newton_shock(amrex::Real& W_s, const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real p_s, const amrex::Real e_s, const amrex::Real* xn,
-             amrex::Real* rhostar_hist, amrex::Real* Ws_hist,
+newton_shock(Real& W_s, const Real pstar, const Real rho_s, const Real p_s, const Real e_s, const Real* xn,
+             Real* rhostar_hist, Real* Ws_hist,
              eos_t& eos_state, bool& converged) {
 
     // Newton iterations -- we are zeroing the energy R-H jump condition
@@ -65,12 +61,12 @@ newton_shock(amrex::Real& W_s, const amrex::Real pstar, const amrex::Real rho_s,
     int iter = 1;
     while (! converged && iter < max_iters) {
 
-        amrex::Real rhostar_s, f, fprime;
+        Real rhostar_s, f, fprime;
 
         W_s_shock(W_s, pstar, rho_s, p_s, e_s, xn,
                   rhostar_s, eos_state, f, fprime);
 
-        amrex::Real dW = -f / fprime;
+        Real dW = -f / fprime;
 
         if (std::abs(dW) < tol * W_s) {
             converged = true;
@@ -89,14 +85,14 @@ newton_shock(amrex::Real& W_s, const amrex::Real pstar, const amrex::Real rho_s,
 
 AMREX_INLINE
 void
-shock(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real u_s, const amrex::Real p_s, const amrex::Real* xn,
-      const amrex::Real gammaE_bar, const amrex::Real gammaC_bar,
-      amrex::Real& Z_s, amrex::Real& W_s) {
+shock(const Real pstar, const Real rho_s, const Real u_s, const Real p_s, const Real* xn,
+      const Real gammaE_bar, const Real gammaC_bar,
+      Real& Z_s, Real& W_s) {
 
 
-    const amrex::Real tol_p = 1.e-6_rt;
+    const Real tol_p = 1.e-6_rt;
 
-    amrex::Real rhostar_hist[max_iters], Ws_hist[max_iters];
+    Real rhostar_hist[max_iters], Ws_hist[max_iters];
 
     // compute the Z_s function for a shock following C&G Eq. 20 and
     // 23.  Here the "_s" variables are the state (L or R) that we are
@@ -117,15 +113,15 @@ shock(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real u_s, c
 
     eos(eos_input_rp, eos_state);
 
-    amrex::Real e_s = eos_state.e;
+    Real e_s = eos_state.e;
 
     // to kick things off, we need a guess for W_s.  We'll use the
     // approximation from Colella & Glaz (Eq. 34), which in turn
     // makes an approximation for gammaE_star, using equation 31.
 
-    amrex::Real gammaE_s = p_s / (rho_s * e_s) + 1.0_rt;
+    Real gammaE_s = p_s / (rho_s * e_s) + 1.0_rt;
 
-    amrex::Real gammaE_star = gammaE_s +
+    Real gammaE_star = gammaE_s +
         2.0_rt * (1.0_rt - gammaE_bar / gammaC_bar) * (gammaE_bar - 1.0_rt) *
         (pstar - p_s) / (pstar + p_s);
 
@@ -147,15 +143,15 @@ shock(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real u_s, c
 
     // we need rhostar -- get it from the R-H conditions
 
-    amrex::Real taustar_s = (1.0_rt / rho_s) - (pstar - p_s) / (W_s * W_s);
-    amrex::Real rhostar_s;
+    Real taustar_s = (1.0_rt / rho_s) - (pstar - p_s) / (W_s * W_s);
+    Real rhostar_s;
 
     if (taustar_s < 0.0_rt) {
         rhostar_s = smallrho;
         W_s = std::sqrt((pstar - p_s) / (1.0_rt / rho_s - 1.0_rt / rhostar_s));
     }
 
-    amrex::Real W_s_guess = W_s;
+    Real W_s_guess = W_s;
 
     // newton
 
@@ -185,17 +181,17 @@ shock(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real u_s, c
     // next we compute the derivative dW_s/dpstar -- the paper gives
     // dW**2/dpstar (Eq. 23), so we take 1/2W of that
 
-    amrex::Real C = std::sqrt(eos_state.gam1 * pstar * rhostar_s);
+    Real C = std::sqrt(eos_state.gam1 * pstar * rhostar_s);
 
-    amrex::Real p_e = eos_state.dpdT / eos_state.dedT;
-    amrex::Real p_rho = eos_state.dpdr - eos_state.dpdT * eos_state.dedr / eos_state.dedT;
+    Real p_e = eos_state.dpdT / eos_state.dedT;
+    Real p_rho = eos_state.dpdr - eos_state.dpdT * eos_state.dedr / eos_state.dedT;
 
-    amrex::Real p_tau = -std::pow(rhostar_s, 2) * p_rho;
+    Real p_tau = -std::pow(rhostar_s, 2) * p_rho;
 
-    amrex::Real dW2dpstar = (C*C - W_s*W_s) * W_s * W_s /
+    Real dW2dpstar = (C*C - W_s*W_s) * W_s * W_s /
         ((0.5_rt * (pstar + p_s) * p_e - p_tau) * (pstar - p_s));
 
-    amrex::Real dWdpstar = 0.5_rt * dW2dpstar / W_s;
+    Real dWdpstar = 0.5_rt * dW2dpstar / W_s;
 
     // finally compute Z_s
 
@@ -206,8 +202,8 @@ shock(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real u_s, c
 
 AMREX_INLINE
 void
-riemann_invariant_rhs(const amrex::Real p, const amrex::Real tau, const amrex::Real u, const amrex::Real* xn, const int iwave,
-                      amrex::Real& dtaudp, amrex::Real& dudp) {
+riemann_invariant_rhs(const Real p, const Real tau, const Real u, const Real* xn, const int iwave,
+                      Real& dtaudp, Real& dudp) {
 
     // here, p is out independent variable, and tau, u are the
     // dependent variables.  We return the derivatives of these
@@ -225,7 +221,7 @@ riemann_invariant_rhs(const amrex::Real p, const amrex::Real tau, const amrex::R
 
     eos(eos_input_rp, eos_state);
 
-    amrex::Real C = std::sqrt(eos_state.gam1 * p / tau);
+    Real C = std::sqrt(eos_state.gam1 * p / tau);
 
     dtaudp = -1.0_rt / (C * C);
 
@@ -240,8 +236,8 @@ riemann_invariant_rhs(const amrex::Real p, const amrex::Real tau, const amrex::R
 
 AMREX_INLINE
 void
-riemann_invariant_rhs2(const amrex::Real u, const amrex::Real tau, const amrex::Real p, const amrex::Real* xn, const int iwave,
-                       amrex::Real& dtaudu, amrex::Real& dpdu) {
+riemann_invariant_rhs2(const Real u, const Real tau, const Real p, const Real* xn, const int iwave,
+                       Real& dtaudu, Real& dpdu) {
 
     // here, u is out independent variable, and tau, p are the
     // dependent variables.  We return the derivatives of these
@@ -259,7 +255,7 @@ riemann_invariant_rhs2(const amrex::Real u, const amrex::Real tau, const amrex::
 
     eos(eos_input_rp, eos_state);
 
-    amrex::Real C = std::sqrt(eos_state.gam1 * p / tau);
+    Real C = std::sqrt(eos_state.gam1 * p / tau);
 
     if (iwave == 3) {
        dpdu = C;
@@ -274,8 +270,8 @@ riemann_invariant_rhs2(const amrex::Real u, const amrex::Real tau, const amrex::
 
 AMREX_INLINE
 void
-rarefaction(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real u_s, const amrex::Real p_s,
-            const amrex::Real* xn, const int iwave, amrex::Real& Z_s, amrex::Real& W_s, amrex::Real& rhostar) {
+rarefaction(const Real pstar, const Real rho_s, const Real u_s, const Real p_s,
+            const Real* xn, const int iwave, Real& Z_s, Real& W_s, Real& rhostar) {
 
     const int npts = 1000;
 
@@ -283,27 +279,27 @@ rarefaction(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real 
     // region by integrating the Riemann invariant from p_s to pstar.
     // This means solving a system of ODEs.  We use 4th-order R-K.
 
-    amrex::Real tau = 1.0_rt / rho_s;
-    amrex::Real u = u_s;
-    amrex::Real p = p_s;
+    Real tau = 1.0_rt / rho_s;
+    Real u = u_s;
+    Real p = p_s;
 
-    amrex::Real dp = (pstar - p_s) / static_cast<amrex::Real>(npts);
-    amrex::Real dp2 = 0.5_rt * dp;
+    Real dp = (pstar - p_s) / static_cast<Real>(npts);
+    Real dp2 = 0.5_rt * dp;
 
     for (int i = 1; i <= npts; ++i) {
 
         // do 4th-order RT
 
-        amrex::Real dtaudp1, dudp1;
+        Real dtaudp1, dudp1;
         riemann_invariant_rhs(p, tau, u, xn, iwave, dtaudp1, dudp1);
 
-        amrex::Real dtaudp2, dudp2;
+        Real dtaudp2, dudp2;
         riemann_invariant_rhs(p+dp2, tau+dp2*dtaudp1, u+dp2*dudp1, xn, iwave, dtaudp2, dudp2);
 
-        amrex::Real dtaudp3, dudp3;
+        Real dtaudp3, dudp3;
         riemann_invariant_rhs(p+dp2, tau+dp2*dtaudp2, u+dp2*dudp2, xn, iwave, dtaudp3, dudp3);
 
-        amrex::Real dtaudp4, dudp4;
+        Real dtaudp4, dudp4;
         riemann_invariant_rhs(p+dp, tau+dp*dtaudp3, u+dp*dudp3, xn, iwave, dtaudp4, dudp4);
 
         p += dp;
@@ -340,8 +336,8 @@ rarefaction(const amrex::Real pstar, const amrex::Real rho_s, const amrex::Real 
 
 AMREX_INLINE
 void
-rarefaction_to_u(const amrex::Real rho_s, const amrex::Real u_s, const amrex::Real p_s, const amrex::Real* xn, const int iwave, const amrex::Real xi,
-                 amrex::Real& rho, amrex::Real& p, amrex::Real& u) {
+rarefaction_to_u(const Real rho_s, const Real u_s, const Real p_s, const Real* xn, const int iwave, const Real xi,
+                 Real& rho, Real& p, Real& u) {
 
     const int npts = 1000;
 
@@ -359,7 +355,7 @@ rarefaction_to_u(const amrex::Real rho_s, const amrex::Real u_s, const amrex::Re
     // dp/du =  C; dtau/du = -1/C   for the 1-wave
     // dp/du = -C; dtau/du =  1/C   for the 3-wave
 
-    amrex::Real tau = 1.0_rt / rho_s;
+    Real tau = 1.0_rt / rho_s;
     u = u_s;
     p = p_s;
 
@@ -376,37 +372,37 @@ rarefaction_to_u(const amrex::Real rho_s, const amrex::Real u_s, const amrex::Re
 
     eos(eos_input_rp, eos_state);
 
-    amrex::Real c = std::sqrt(eos_state.gam1 * p * tau);
+    Real c = std::sqrt(eos_state.gam1 * p * tau);
 
-    amrex::Real ustop;
+    Real ustop;
     if (iwave == 1) {
         ustop = xi + c;
     } else if (iwave == 3) {
         ustop = xi - c;
     }
 
-    amrex::Real du = (ustop - u_s) / static_cast<amrex::Real>(npts);
+    Real du = (ustop - u_s) / static_cast<Real>(npts);
 
     bool finished = false;
 
     std::cout << "integrating from u: " << u << " " << ustop << " " << xi << " " << c << std::endl;
 
-    amrex::Real du2 = 0.5_rt * du;
+    Real du2 = 0.5_rt * du;
 
     while (! finished) {
 
         // do 4th-order RT
 
-        amrex::Real dtaudu1, dpdu1;
+        Real dtaudu1, dpdu1;
         riemann_invariant_rhs2(u, tau, p, xn, iwave, dtaudu1, dpdu1);
 
-        amrex::Real dtaudu2, dpdu2;
+        Real dtaudu2, dpdu2;
         riemann_invariant_rhs2(u+du2, tau+du2*dtaudu1, p+du2*dpdu1, xn, iwave, dtaudu2, dpdu2);
 
-        amrex::Real dtaudu3, dpdu3;
+        Real dtaudu3, dpdu3;
         riemann_invariant_rhs2(u+du2, tau+du2*dtaudu2, p+du2*dpdu2, xn, iwave, dtaudu3, dpdu3);
 
-        amrex::Real dtaudu4, dpdu4;
+        Real dtaudu4, dpdu4;
         riemann_invariant_rhs2(u+du, tau+du*dtaudu3, p+du*dpdu3, xn, iwave, dtaudu4, dpdu4);
 
         u += du;

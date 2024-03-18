@@ -105,12 +105,12 @@ Diffusion::make_mg_bc ()
             mlmg_lobc[idim] = MLLinOp::BCType::Periodic;
             mlmg_hibc[idim] = MLLinOp::BCType::Periodic;
         } else {
-            if (phys_bc->lo(idim) == amrex::PhysBCType::inflow) {
+            if (phys_bc->lo(idim) == Inflow) {
                 mlmg_lobc[idim] = MLLinOp::BCType::Dirichlet;
             } else {
                 mlmg_lobc[idim] = MLLinOp::BCType::Neumann;
             }
-            if (phys_bc->hi(idim) == amrex::PhysBCType::symmetry) {
+            if (phys_bc->hi(idim) == Symmetry) {
                 mlmg_hibc[idim] = MLLinOp::BCType::Dirichlet;
             } else {
                 mlmg_hibc[idim] = MLLinOp::BCType::Neumann;

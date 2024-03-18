@@ -5,7 +5,6 @@
 #include <eos.H>
 #include <network.H>
 #if defined(NSE_TABLE)
-#include <nse_table_type.H>
 #include <nse_table.H>
 #elif defined(NSE_NET)
 #include <nse_solver.H>
@@ -16,6 +15,7 @@ void problem_initialize_state_data (int i, int j, int k,
                                     Array4<Real> const& state,
                                     const GeometryData& geomdata)
 {
+    int coord_type = geomdata.Coord();
 
     const Real* dx = geomdata.CellSize();
     const Real* problo = geomdata.ProbLo();
@@ -64,15 +64,14 @@ void problem_initialize_state_data (int i, int j, int k,
     burn_state.y_e = ye;
 
 #if defined(NSE_TABLE)
-    nse_table_t nse_state;
-    nse_state.T = T;
-    nse_state.rho = problem::rho0;
-    nse_state.Ye = ye;
-    nse_interp(nse_state);
+    Real abar;
+    Real dq;
+    Real dyedt;
+    Real dabardt;
+    Real dbeadt;
+    Real e_nu;
 
-    for (int n = 0; n < NumSpec; ++n) {
-        burn_state.xn[n] = nse_state.X[n];
-    }
+    nse_interp(T, problem::rho0, ye, abar, dq, dyedt, dabardt, dbeadt, e_nu, burn_state.xn);
 #elif defined(NSE_NET)
     Real eps = 1.e-10_rt;
     bool input_ye_is_valid = true;
@@ -100,22 +99,22 @@ void problem_initialize_state_data (int i, int j, int k,
     // since the species are interpolated, normalize them
 
     Real sumX = 0.0_rt;
-    for (auto X : burn_state.xn) {
-        sumX += X;
+    for (int n = 0; n < NumSpec; n++) {
+        sumX += burn_state.xn[n];
     }
-    for (auto & X : burn_state.xn) {
-        X /= sumX;
+    for (int n = 0; n < NumSpec; n++) {
+        burn_state.xn[n] /= sumX;
     }
-
+    
 #ifdef NSE_NET
     state(i,j,k,UMUP) = burn_state.mu_p;
     state(i,j,k,UMUN) = burn_state.mu_n;
 #endif
-
+    
 #ifdef AUX_THERMO
     burn_state.aux[AuxZero::iye] = ye;
-    burn_state.aux[AuxZero::iabar] = nse_state.abar;
-    burn_state.aux[AuxZero::ibea] = nse_state.bea;
+    burn_state.aux[AuxZero::iabar] = abar;
+    burn_state.aux[AuxZero::ibea] = dq;
 #endif
 
     eos(eos_input_rt, burn_state);

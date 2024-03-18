@@ -449,6 +449,7 @@ public:
   amrex::Vector<amrex::MultiFab*> area;
 
   int Density;
+  int finest_level;
   int finest_level_allocated;
 
   amrex::BCRec*       phys_bc;

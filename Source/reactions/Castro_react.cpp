@@ -186,14 +186,12 @@ Castro::react_state(MultiFab& s, MultiFab& r, Real time, Real dt, const int stra
     MultiFab tmp_mask_mf;
     const MultiFab& mask_mf = mask_covered_zones ? getLevel(level+1).build_fine_mask() : tmp_mask_mf;
 
-#if defined(AMREX_USE_GPU)
-    Gpu::Buffer<int> d_num_failed({0});
-    auto* p_num_failed = d_num_failed.data();
-#endif
-    int num_failed = 0;
+    ReduceOps<ReduceOpSum> reduce_op;
+    ReduceData<Real> reduce_data(reduce_op);
+    using ReduceTuple = typename decltype(reduce_data)::Type;
 
 #ifdef _OPENMP
-#pragma omp parallel reduction(+:num_failed)
+#pragma omp parallel
 #endif
     for (MFIter mfi(s, TilingIfNotGPU()); mfi.isValid(); ++mfi)
     {
@@ -203,39 +201,36 @@ Castro::react_state(MultiFab& s, MultiFab& r, Real time, Real dt, const int stra
         auto U = s.array(mfi);
         auto reactions = r.array(mfi);
         auto weights = store_burn_weights ? burn_weights.array(mfi) : Array4<Real>{};
-        const auto mask = mask_covered_zones ? mask_mf.array(mfi) : Array4<Real>{};
+        auto mask = mask_covered_zones ? mask_mf.array(mfi) : Array4<Real>{};
 
         const auto dx = geom.CellSizeArray();
 #ifdef MODEL_PARSER
         const auto problo = geom.ProbLoArray();
 #endif
 
-#if defined(AMREX_USE_GPU)
-        ParallelFor(bx, [=] AMREX_GPU_DEVICE (int i, int j, int k)
-#else
-        LoopOnCpu(bx, [&] (int i, int j, int k) mutable
-#endif
+        reduce_op.eval(bx, reduce_data,
+        [=] AMREX_GPU_HOST_DEVICE (int i, int j, int k) -> ReduceTuple
         {
 
             burn_t burn_state;
 #ifdef NSE_NET
-            burn_state.mu_p = U(i,j,k,UMUP);
-            burn_state.mu_n = U(i,j,k,UMUN);
+	    burn_state.mu_p = U(i,j,k,UMUP);
+	    burn_state.mu_n = U(i,j,k,UMUN);
 
-            burn_state.y_e = -1.0_rt;
+	    burn_state.y_e = -1.0_rt;
 #endif
 
 #if AMREX_SPACEDIM == 1
             burn_state.dx = dx[0];
 #else
-            burn_state.dx = amrex::min(AMREX_D_DECL(dx[0], dx[1], dx[2]));
+            burn_state.dx = amrex::min(D_DECL(dx[0], dx[1], dx[2]));
 #endif
 
             // Initialize some data for later.
 
             bool do_burn = true;
             burn_state.success = true;
-            int burn_failed = 0;
+            Real burn_failed = 0.0_rt;
 
             // Don't burn on zones inside shock regions, if the relevant option is set.
 
@@ -256,9 +251,9 @@ Castro::react_state(MultiFab& s, MultiFab& r, Real time, Real dt, const int stra
 
             burn_state.rho = U(i,j,k,URHO);
 
-            // e is used as an input for some NSE solvers
+	    // e is used as an input for some NSE solvers
 
-            burn_state.e = U(i,j,k,UEINT) * rhoInv;
+	    burn_state.e = U(i,j,k,UEINT) * rhoInv;
 
             // this T is consistent with UEINT because we did an EOS call before
             // calling this function
@@ -334,7 +329,7 @@ Castro::react_state(MultiFab& s, MultiFab& r, Real time, Real dt, const int stra
                 // If we were unsuccessful, update the failure count.
 
                 if (!burn_state.success) {
-                    burn_failed = 1;
+                    burn_failed = 1.0_rt;
                 }
 
                 // Add burning rates to reactions MultiFab, but be
@@ -368,19 +363,19 @@ Castro::react_state(MultiFab& s, MultiFab& r, Real time, Real dt, const int stra
                         }
                     }
 #ifdef NSE
-                    if (store_omegadot == 1) {
-                        reactions(i,j,k,NumSpec+NumAux+1) = burn_state.nse;
-                    }
-                    else {
-                        reactions(i,j,k,1) = burn_state.nse;
-                    }
+		    if (store_omegadot == 1) {
+		      reactions(i,j,k,NumSpec+NumAux+1) = burn_state.nse;
+		    }
+		    else {
+		      reactions(i,j,k,1) = burn_state.nse;
+		    }
 #endif
                 }
 
                 // update the state
 #ifdef NSE_NET
-                U(i,j,k,UMUP) = burn_state.mu_p;
-                U(i,j,k,UMUN) = burn_state.mu_n;
+		U(i,j,k,UMUP) = burn_state.mu_p;
+		U(i,j,k,UMUN) = burn_state.mu_n;
 #endif
                 for (int n = 0; n < NumSpec; ++n) {
                     U(i,j,k,UFS+n) = U(i,j,k,URHO) * burn_state.xn[n];
@@ -404,25 +399,19 @@ Castro::react_state(MultiFab& s, MultiFab& r, Real time, Real dt, const int stra
 
             }
 
-#if defined(AMREX_USE_GPU)
-            if (burn_failed) {
-                Gpu::Atomic::Add(p_num_failed, burn_failed);
-            }
-#else
-            num_failed += burn_failed;
-#endif
+
+            return {burn_failed};
+
         });
 
-#if defined(AMREX_USE_HIP)
-        Gpu::streamSynchronize(); // otherwise HIP may fail to allocate the necessary resources.
-#endif
     }
 
-#if defined(AMREX_USE_GPU)
-    num_failed = *(d_num_failed.copyToHost());
-#endif
+    ReduceTuple hv = reduce_data.value();
+    Real burn_failed = amrex::get<0>(hv);
 
-    burn_success = !num_failed;
+    if (burn_failed != 0.0) {
+      burn_success = 0;
+    }
 
     ParallelDescriptor::ReduceIntMin(burn_success);
 
@@ -527,13 +516,11 @@ Castro::react_state(Real time, Real dt)
 
     int burn_success = 1;
 
-#if defined(AMREX_USE_GPU)
-    Gpu::Buffer<int> d_num_failed({0});
-    auto* p_num_failed = d_num_failed.data();
-#endif
-    int num_failed = 0;
+    ReduceOps<ReduceOpSum> reduce_op;
+    ReduceData<Real> reduce_data(reduce_op);
 
-    // why no omp here?
+    using ReduceTuple = typename decltype(reduce_data)::Type;
+
     for (MFIter mfi(S_new, TilingIfNotGPU()); mfi.isValid(); ++mfi)
     {
         const Box& bx = mfi.growntilebox(ng);
@@ -548,38 +535,35 @@ Castro::react_state(Real time, Real dt)
         auto I     = SDC_react.array(mfi);
         auto react_src = reactions.array(mfi);
         auto weights = store_burn_weights ? burn_weights.array(mfi) : Array4<Real>{};
-        const auto mask = mask_covered_zones ? mask_mf.array(mfi) : Array4<Real>{};
+        auto mask = mask_covered_zones ? mask_mf.array(mfi) : Array4<Real>{};
 
         int lsdc_iteration = sdc_iteration;
 
         const auto dx = geom.CellSizeArray();
         const auto problo = geom.ProbLoArray();
 
-#if defined(AMREX_USE_GPU)
-        ParallelFor(bx, [=] AMREX_GPU_DEVICE (int i, int j, int k)
-#else
-        LoopOnCpu(bx, [&] (int i, int j, int k) mutable
-#endif
+        reduce_op.eval(bx, reduce_data,
+        [=] AMREX_GPU_HOST_DEVICE (int i, int j, int k) -> ReduceTuple
         {
             burn_t burn_state;
 
 #if AMREX_SPACEDIM == 1
             burn_state.dx = dx[0];
 #else
-            burn_state.dx = amrex::min(AMREX_D_DECL(dx[0], dx[1], dx[2]));
+            burn_state.dx = amrex::min(D_DECL(dx[0], dx[1], dx[2]));
 #endif
 
 #ifdef NSE_NET
-            burn_state.mu_p = U_old(i,j,k,UMUP);
-            burn_state.mu_n = U_old(i,j,k,UMUN);
+	    burn_state.mu_p = U_old(i,j,k,UMUP);
+	    burn_state.mu_n = U_old(i,j,k,UMUN);
 
-            burn_state.y_e = -1.0_rt;
+	    burn_state.y_e = -1.0_rt;
 #endif
             // Initialize some data for later.
 
             bool do_burn = true;
             burn_state.success = true;
-            int burn_failed = 0;
+            Real burn_failed = 0.0_rt;
 
             // Don't burn on zones inside shock regions, if the
             // relevant option is set.
@@ -703,13 +687,13 @@ Castro::react_state(Real time, Real dt)
                 // If we were unsuccessful, update the failure count.
 
                 if (!burn_state.success) {
-                    burn_failed = 1;
+                    burn_failed = 1.0_rt;
                 }
 
                 // update the state data.
 #ifdef NSE_NET
-                U_new(i,j,k,UMUP) = burn_state.mu_p;
-                U_new(i,j,k,UMUN) = burn_state.mu_n;
+	        U_new(i,j,k,UMUP) = burn_state.mu_p;
+	        U_new(i,j,k,UMUN) = burn_state.mu_n;
 #endif
                 U_new(i,j,k,UEDEN) = burn_state.y[SEDEN];
                 U_new(i,j,k,UEINT) = burn_state.y[SEINT];
@@ -756,12 +740,12 @@ Castro::react_state(Real time, Real dt)
                          }
                      }
 #ifdef NSE
-                    if (store_omegadot == 1) {
-                        react_src(i,j,k,NumSpec+NumAux+1) = burn_state.nse;
-                    }
-                    else {
-                        react_src(i,j,k,1) = burn_state.nse;
-                    }
+		    if (store_omegadot == 1) {
+		      react_src(i,j,k,NumSpec+NumAux+1) = burn_state.nse;
+		    }
+		    else {
+		      react_src(i,j,k,1) = burn_state.nse;
+		    }
 #endif
                  }
 
@@ -796,25 +780,16 @@ Castro::react_state(Real time, Real dt)
                 }
             }
 
-#if defined(AMREX_USE_GPU)
-            if (burn_failed) {
-                Gpu::Atomic::Add(p_num_failed, burn_failed);
-            }
-#else
-            num_failed += burn_failed;
-#endif
+            return {burn_failed};
         });
-
-#if defined(AMREX_USE_HIP)
-        Gpu::streamSynchronize(); // otherwise HIP may fail to allocate the necessary resources.
-#endif
     }
 
-#if defined(AMREX_USE_GPU)
-    num_failed = *(d_num_failed.copyToHost());
-#endif
+    ReduceTuple hv = reduce_data.value();
+    Real burn_failed = amrex::get<0>(hv);
 
-    burn_success = !num_failed;
+    if (burn_failed != 0.0) {
+        burn_success = 0;
+    }
 
     ParallelDescriptor::ReduceIntMin(burn_success);
 

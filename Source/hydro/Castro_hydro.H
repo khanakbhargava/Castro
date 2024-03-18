@@ -141,7 +141,6 @@
 ///
     void shock(const amrex::Box& bx,
                amrex::Array4<amrex::Real const> const& q_arr,
-               amrex::Array4<amrex::Real const> const& q_src_arr,
                amrex::Array4<amrex::Real> const& shk);
 
 ///
@@ -822,7 +821,7 @@
 
     void do_enforce_minimum_density(const amrex::Box& bx,
                                     amrex::Array4<amrex::Real> const& state_arr,
-                                    const int verbose_warnings);
+                                    const int verbose);
 
 #ifdef HYBRID_MOMENTUM
 
