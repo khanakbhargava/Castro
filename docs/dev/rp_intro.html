@@ -18,10 +18,12 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "macros": {"kth": "{{k_\\mathrm{th}}}", "gcc": "{\\mathrm{g~cm^{-3}}}", "cms": "{\\mathrm{cm~s^{-1}}}", "presunit": "{\\mathrm{dyn~cm^{-2}}}", "accelunit": "{\\mathrm{cm~s^{-2}}}", "ergg": "{\\mathrm{erg~g^{-1}}}", "Ab": "{{\\bf A}}", "eb": "{{\\bf e}}", "Fb": "{{\\bf F}}", "gb": "{{\\bf g}}", "Hb": "{{\\bf H}}", "ib": "{{\\bf i}}", "Ib": "{{\\bf I}}", "Kb": "{{\\bf K}}", "lb": "{{\\bf l}}", "Lb": "{{\\bf L}}", "nb": "{{\\bf n}}", "Pb": "{{\\bf P}}", "Qb": "{{\\bf Q}}", "rb": "{{\\bf r}}", "Rb": "{{\\bf R}}", "Sb": "{{\\bf S}}", "ub": "{{\\bf u}}", "Ub": "{{\\bf U}}", "xb": "{{\\bf x}}", "dt": "{\\Delta t}", "omegadot": "{\\dot\\omega}", "inp": "{{\\rm in}}", "outp": "{{\\rm out}}", "sync": "{{\\rm sync}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\half}", "nph": "{{n+\\myhalf}}", "kpp": "{\\ensuremath{\\kappa_{\\mathrm{P}}}}", "kpr": "{\\ensuremath{\\kappa_{\\mathrm{R}}}}", "kpf": "{\\ensuremath{\\kappa_{\\mathrm{F}}}}", "vb": "{\\boldsymbol{v}}", "vbt": "{\\widetilde{\\vb}}", "rbt": "{\\widetilde{\\rb}}", "ob": "{\\boldsymbol{\\omega}}", "nablab": "{\\boldsymbol{\\nabla}}", "avg": ["{{\\left \\langle #1 \\right \\rangle}}", 1]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -167,8 +169,8 @@ are set at runtime via the inputs file.</p>
 <h3>Castro-specific parameters<a class="headerlink" href="#castro-specific-parameters" title="Link to this heading"></a></h3>
 <p>The Castro parameters that control the behavior of the code and
 physics modules are listed in <code class="docutils literal notranslate"><span class="pre">_cpp_parameters</span></code> and take the form of:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># comment describing the parameter
-name   type   default   need in Fortran?   ifdef
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># comment describing the parameter</span>
+<span class="n">name</span>   <span class="nb">type</span>   <span class="n">default</span>   <span class="n">ifdef</span>
 </pre></div>
 </div>
 <p>Here,</p>
@@ -186,14 +188,9 @@ was implemented for backwards compatibility.</p>
 <li><p><cite>default</cite> is the default value of the parameter.</p></li>
 </ul>
 </div></blockquote>
-<p>The next columns are optional, but you need to fill in all of the
-information up to and including any of the optional columns you need
-(e.g., if you are going to provide “need in Fortran?” and “ifdef”).</p>
+<p>The next column is optional:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><cite>need in Fortran?</cite> is <code class="docutils literal notranslate"><span class="pre">y</span></code> if the runtime parameter should be
-made available in Fortran (through <code class="docutils literal notranslate"><span class="pre">meth_params_module</span></code>).
-Note: this option is deprecated.</p></li>
 <li><p><cite>ifdef</cite> provides the name of a preprocessor name that should
 wrap this parameter definition—it will only be compiled in if that
 name is defined to the preprocessor.</p></li>
