@@ -31,7 +31,7 @@ namespace: ``castro``
 
 **hydrodynamics**
 
-.. index:: castro.difmag, castro.small_dens, castro.small_temp, castro.small_pres, castro.small_ener, castro.do_hydro, castro.time_integration_method, castro.limit_fourth_order, castro.initialization_is_cell_average, castro.use_reconstructed_gamma1, castro.add_ext_src, castro.hybrid_hydro, castro.ppm_type, castro.ppm_do_limiting, castro.mhd_limit_characteristic, castro.ppm_temp_fix, castro.plm_iorder, castro.plm_limiter, castro.hybrid_riemann, castro.riemann_solver, castro.cg_maxiter, castro.cg_tol, castro.cg_blend, castro.use_flattening, castro.transverse_use_eos, castro.transverse_reset_density, castro.transverse_reset_rhoe, castro.dual_energy_eta1, castro.dual_energy_eta2, castro.use_pslope, castro.pslope_cutoff_density, castro.limit_fluxes_on_small_dens, castro.speed_limit, castro.do_sponge, castro.sponge_implicit, castro.ext_src_implicit, castro.source_term_predictor, castro.first_order_hydro, castro.xl_ext_bc_type, castro.xr_ext_bc_type, castro.yl_ext_bc_type, castro.yr_ext_bc_type, castro.zl_ext_bc_type, castro.zr_ext_bc_type, castro.hse_zero_vels, castro.hse_interp_temp, castro.hse_fixed_temp, castro.hse_reflect_vels, castro.fill_ambient_bc, castro.ambient_fill_dir, castro.ambient_outflow_vel, castro.clamp_ambient_temp, castro.ambient_safety_factor, castro.ambient_density, castro.ambient_temp, castro.ambient_energy, castro.sdc_order, castro.sdc_quadrature, castro.sdc_extra, castro.sdc_solver, castro.use_axisymmetric_geom_source, castro.add_sdc_react_source_to_advection, castro.hydro_memory_footprint_ratio
+.. index:: castro.difmag, castro.small_dens, castro.small_temp, castro.small_pres, castro.small_ener, castro.do_hydro, castro.time_integration_method, castro.limit_fourth_order, castro.initialization_is_cell_average, castro.use_reconstructed_gamma1, castro.add_ext_src, castro.hybrid_hydro, castro.ppm_type, castro.ppm_do_limiting, castro.mhd_limit_characteristic, castro.ppm_temp_fix, castro.plm_iorder, castro.plm_limiter, castro.hybrid_riemann, castro.riemann_solver, castro.riemann_shock_maxiter, castro.riemann_pstar_tol, castro.riemann_cg_blend, castro.use_flattening, castro.transverse_use_eos, castro.transverse_reset_density, castro.transverse_reset_rhoe, castro.dual_energy_eta1, castro.dual_energy_eta2, castro.use_pslope, castro.ppm_well_balanced, castro.pslope_cutoff_density, castro.limit_fluxes_on_small_dens, castro.speed_limit, castro.do_sponge, castro.sponge_implicit, castro.ext_src_implicit, castro.source_term_predictor, castro.first_order_hydro, castro.xl_ext_bc_type, castro.xr_ext_bc_type, castro.yl_ext_bc_type, castro.yr_ext_bc_type, castro.zl_ext_bc_type, castro.zr_ext_bc_type, castro.hse_zero_vels, castro.hse_interp_temp, castro.hse_fixed_temp, castro.hse_reflect_vels, castro.fill_ambient_bc, castro.ambient_fill_dir, castro.ambient_outflow_vel, castro.clamp_ambient_temp, castro.ambient_safety_factor, castro.ambient_density, castro.ambient_temp, castro.ambient_energy, castro.sdc_order, castro.sdc_quadrature, castro.sdc_extra, castro.sdc_solver, castro.use_geom_source, castro.add_sdc_react_source_to_advection, castro.hydro_memory_footprint_ratio
 
 
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
@@ -100,17 +100,16 @@ namespace: ``castro``
 |                                            | Ferguson (a two-shock solver); 1: Colella \& Glaz (a two-   |                             |
 |                                            | shock solver) 2: HLLC                                       |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
-| ``cg_maxiter``                             | for the Colella \& Glaz Riemann solver, the maximum number  | 12                          |
-|                                            | of iterations to take when solving for the star state       |                             |
+| ``riemann_shock_maxiter``                  | maximum number of iterations to used in the Riemann solver  | 12                          |
+|                                            | when solving for the star state                             |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
-| ``cg_tol``                                 | for the Colella \& Glaz Riemann solver, the tolerance to    | 1.0e-5                      |
-|                                            | demand in finding the star state                            |                             |
+| ``riemann_pstar_tol``                      | tolerance to use when finding the star stat                 | 1.0e-5                      |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
-| ``cg_blend``                               | for the Colella \& Glaz Riemann solver, what to do if we do | 2                           |
+| ``riemann_cg_blend``                       | for the Colella \& Glaz Riemann solver, what to do if we do | 2                           |
 |                                            | not converge to a solution for the star state. 0 = do       |                             |
 |                                            | nothing; print iterations and exit 1 = revert to the        |                             |
 |                                            | original guess for p-star 2 = do a bisection search for     |                             |
-|                                            | another 2 * cg_maxiter iterations.                          |                             |
+|                                            | another 2 * riemann_shock_maxiter iterations.               |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
 | ``use_flattening``                         | flatten the reconstructed profiles around shocks to prevent | 1                           |
 |                                            | them from becoming too thin                                 |                             |
@@ -140,6 +139,10 @@ namespace: ``castro``
 | ``use_pslope``                             | for the piecewise linear reconstruction, do we subtract off | 0                           |
 |                                            | :math:`(\rho g)` from the pressure before limiting?  This   |                             |
 |                                            | is a well-balanced method that does well with HSE           |                             |
++--------------------------------------------+-------------------------------------------------------------+-----------------------------+
+| ``ppm_well_balanced``                      | for PPM, do we only use the perturbational pressure in the  | 0                           |
+|                                            | characteristic tracing?  This is more indepth than the      |                             |
+|                                            | simple `use_pslope` approach.                               |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
 | ``pslope_cutoff_density``                  | if we are using pslope, below what density to we turn off   | -1.e20                      |
 |                                            | the well-balanced reconstruction?                           |                             |
@@ -235,8 +238,10 @@ namespace: ``castro``
 | ``sdc_solver``                             | which SDC nonlinear solver to use?  1 = Newton, 2 = VODE, 3 | 1                           |
 |                                            | = VODE for first iter                                       |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
-| ``use_axisymmetric_geom_source``           | for 2-d axisymmetry, do we include the geometry source      | 1                           |
-|                                            | terms from Bernand-Champmartin?                             |                             |
+| ``use_geom_source``                        | Do we include geometry source terms due to local unit       | 1                           |
+|                                            | vectors in non-Cartesian Coord? We currently support R-Z    |                             |
+|                                            | cylinderical 2D (Bernand-Champmartin) and R-THETA spherical |                             |
+|                                            | 2D                                                          |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
 | ``add_sdc_react_source_to_advection``      | for simplified-SDC, do we add the reactive source           | 1                           |
 |                                            | prediction to the interface states used in the advective    |                             |
@@ -456,8 +461,13 @@ namespace: ``castro``
 | ``implicit_rotation_update``               | we can do a implicit solution of the rotation update to     | 1                           |
 |                                            | allow for better coupling of the Coriolis terms             |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
-| ``rot_axis``                               | the coordinate axis (:math:`x=1`, :math:`y=2`, :math:`z=3`) | 3                           |
-|                                            | for the rotation vector                                     |                             |
+| ``rot_axis``                               | the coordinate axis for the rotation vector For Cartesian:  | 3                           |
+|                                            | (:math:`x=1`, :math:`y=2`, :math:`z=3`) For non-Cartesian   |                             |
+|                                            | coordinates, this parameter doesn't do anything because:    |                             |
+|                                            | For RZ (Cylindrical 2D), it is automatically set to z-axis  |                             |
+|                                            | (rot_axis = 2) For Spherical2D, it is also assumed to be in |                             |
+|                                            | the z-axis i.e. cos(theta) r_hat - sin(theta) theta_hat in  |                             |
+|                                            | Spherical coordinate.                                       |                             |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
 | ``use_point_mass``                         | include a central point mass                                | 0                           |
 +--------------------------------------------+-------------------------------------------------------------+-----------------------------+
