@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,23 +7,19 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>File problem_initialize.H &mdash; Castro  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=2e394b92" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=eaa7b67c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -64,6 +62,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../mpi_plus_x.html">Running Options: CPUs and GPUs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FlowChart.html">Flowchart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software.html">Software Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU Programming Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../problem_setups.html">Distributed Problem Setups</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../timestepping.html">Timestepping and Retries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../creating_a_problem.html">Setting Up Your Own Problem</a></li>
@@ -105,6 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Castro__gravity_8H.html">File Castro_gravity.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__hydro_8H.html">File Castro_hydro.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__io_8H.html">File Castro_io.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Castro__math_8H.html">File Castro_math.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__mhd_8H.html">File Castro_mhd.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__react_8H.html">File Castro_react.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__react__util_8H.html">File Castro_react_util.H</a></li>
@@ -118,6 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Gravity_8H.html">File Gravity.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Gravity__util_8H.html">File Gravity_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HABEC_8H.html">File HABEC.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HLL__solvers_8H.html">File HLL_solvers.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HypreABec_8H.html">File HypreABec.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HypreExtMultiABec_8H.html">File HypreExtMultiABec.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MGRadBndry_8H.html">File MGRadBndry.H</a></li>
@@ -147,7 +148,6 @@
 <li class="toctree-l2"><a class="reference internal" href="fourth__center__average_8H.html">File fourth_center_average.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="global_8H.html">File global.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hybrid_8H.html">File hybrid.H</a></li>
-<li class="toctree-l2"><a class="reference internal" href="math_8H.html">File math.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mhd__eigen_8H.html">File mhd_eigen.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mhd__sizes_8H.html">File mhd_sizes.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mhd__util_8H.html">File mhd_util.H</a></li>
@@ -166,13 +166,16 @@
 <li class="toctree-l2"><a class="reference internal" href="problem__tagging_8H.html">File problem_tagging.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rad__util_8H.html">File rad_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reconstruction_8H.html">File reconstruction.H</a></li>
-<li class="toctree-l2"><a class="reference internal" href="riemann_8H.html">File riemann.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riemann__2shock__solvers_8H.html">File riemann_2shock_solvers.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riemann__constants_8H.html">File riemann_constants.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="riemann__solvers_8H.html">File riemann_solvers.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riemann__type_8H.html">File riemann_type.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runtime__parameters_8H.html">File runtime_parameters.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdc__cons__to__burn_8H.html">File sdc_cons_to_burn.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdc__newton__solve_8H.html">File sdc_newton_solve.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdc__react__util_8H.html">File sdc_react_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="slope_8H.html">File slope.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timestep_8H.html">File timestep.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vode__rhs__true__sdc_8H.html">File vode_rhs_true_sdc.H</a></li>
 </ul>
 </li>
@@ -232,7 +235,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2018-2022, Castro development team.</p>
+    <p>&#169; Copyright 2018-2024, Castro development team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

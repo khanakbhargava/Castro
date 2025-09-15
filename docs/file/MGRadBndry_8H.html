@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,23 +7,19 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>File MGRadBndry.H &mdash; Castro  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=2e394b92" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=eaa7b67c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -64,6 +62,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../mpi_plus_x.html">Running Options: CPUs and GPUs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FlowChart.html">Flowchart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software.html">Software Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gpu.html">GPU Programming Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../problem_setups.html">Distributed Problem Setups</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../timestepping.html">Timestepping and Retries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../creating_a_problem.html">Setting Up Your Own Problem</a></li>
@@ -105,6 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Castro__gravity_8H.html">File Castro_gravity.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__hydro_8H.html">File Castro_hydro.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__io_8H.html">File Castro_io.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Castro__math_8H.html">File Castro_math.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__mhd_8H.html">File Castro_mhd.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__react_8H.html">File Castro_react.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Castro__react__util_8H.html">File Castro_react_util.H</a></li>
@@ -118,30 +118,30 @@
 <li class="toctree-l2"><a class="reference internal" href="Gravity_8H.html">File Gravity.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Gravity__util_8H.html">File Gravity_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HABEC_8H.html">File HABEC.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HLL__solvers_8H.html">File HLL_solvers.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HypreABec_8H.html">File HypreABec.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HypreExtMultiABec_8H.html">File HypreExtMultiABec.H</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">File MGRadBndry.H</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv410MGRadBndry"><code class="docutils literal notranslate"><span class="pre">MGRadBndry</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry10MGRadBndryERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEKiRKN5amrex8GeometryE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::MGRadBndry()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndryD0Ev"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::~MGRadBndry()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::setBndryConds()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::setBndryFluxConds()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::mixedBndry()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry14setHomogValuesERKN5amrex5BCRecERN5amrex7IntVectE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::setHomogValues()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry7setTimeEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::setTime()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry13setCorrectionEv"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::setCorrection()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry15unsetCorrectionEv"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::unsetCorrection()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry4initEKi"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::init()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry7ngroupsE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::ngroups</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry5firstE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::first</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry6bcflagE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::bcflag</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry5bcvalE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::bcval</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry4timeE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::time</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry10correctionE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry::correction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry10MGRadBndryERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEKiRKN5amrex8GeometryE"><code class="docutils literal notranslate"><span class="pre">MGRadBndry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE"><code class="docutils literal notranslate"><span class="pre">setBndryConds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode"><code class="docutils literal notranslate"><span class="pre">setBndryFluxConds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE"><code class="docutils literal notranslate"><span class="pre">mixedBndry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry14setHomogValuesERKN5amrex5BCRecERN5amrex7IntVectE"><code class="docutils literal notranslate"><span class="pre">setHomogValues()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry7setTimeEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">setTime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry13setCorrectionEv"><code class="docutils literal notranslate"><span class="pre">setCorrection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry15unsetCorrectionEv"><code class="docutils literal notranslate"><span class="pre">unsetCorrection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry4initEKi"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry7ngroupsE"><code class="docutils literal notranslate"><span class="pre">ngroups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry5firstE"><code class="docutils literal notranslate"><span class="pre">first</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry6bcflagE"><code class="docutils literal notranslate"><span class="pre">bcflag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry5bcvalE"><code class="docutils literal notranslate"><span class="pre">bcval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry4timeE"><code class="docutils literal notranslate"><span class="pre">time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N10MGRadBndry10correctionE"><code class="docutils literal notranslate"><span class="pre">correction</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv413MGRadBndryBld"><code class="docutils literal notranslate"><span class="pre">MGRadBndryBld</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE"><code class="docutils literal notranslate"><span class="pre">MGRadBndryBld::operator()()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE"><code class="docutils literal notranslate"><span class="pre">operator()()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -172,7 +172,6 @@
 <li class="toctree-l2"><a class="reference internal" href="fourth__center__average_8H.html">File fourth_center_average.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="global_8H.html">File global.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hybrid_8H.html">File hybrid.H</a></li>
-<li class="toctree-l2"><a class="reference internal" href="math_8H.html">File math.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mhd__eigen_8H.html">File mhd_eigen.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mhd__sizes_8H.html">File mhd_sizes.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mhd__util_8H.html">File mhd_util.H</a></li>
@@ -191,13 +190,16 @@
 <li class="toctree-l2"><a class="reference internal" href="problem__tagging_8H.html">File problem_tagging.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rad__util_8H.html">File rad_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reconstruction_8H.html">File reconstruction.H</a></li>
-<li class="toctree-l2"><a class="reference internal" href="riemann_8H.html">File riemann.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riemann__2shock__solvers_8H.html">File riemann_2shock_solvers.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riemann__constants_8H.html">File riemann_constants.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="riemann__solvers_8H.html">File riemann_solvers.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="riemann__type_8H.html">File riemann_type.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runtime__parameters_8H.html">File runtime_parameters.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdc__cons__to__burn_8H.html">File sdc_cons_to_burn.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdc__newton__solve_8H.html">File sdc_newton_solve.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdc__react__util_8H.html">File sdc_react_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="slope_8H.html">File slope.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timestep_8H.html">File timestep.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vode__rhs__true__sdc_8H.html">File vode_rhs_true_sdc.H</a></li>
 </ul>
 </li>
@@ -258,13 +260,8 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10MGRadBndryD0Ev">
-<span id="_CPPv3N10MGRadBndryD0Ev"></span><span id="_CPPv2N10MGRadBndryD0Ev"></span><span id="MGRadBndry::~MGRadBndry"></span><span class="target" id="classMGRadBndry_1ae2ae4d3dd8db7fb33cf82422545f7ef9"></span><span class="sig-name descname"><span class="n"><span class="pre">~MGRadBndry</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE">
-<span id="_CPPv3N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE"></span><span id="_CPPv2N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE"></span><span id="MGRadBndry::setBndryConds__amrex::BCRecCR.amrex::GeometryCR.amrex::IntVectR"></span><span class="target" id="classMGRadBndry_1a4ad9007394489d9c9382d26db79fc2e6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBndryConds</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">BCRec</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">phys_bc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Geometry</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">geom</span></span>, <a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">IntVect</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ratio</span></span><span class="sig-paren">)</span><br /></dt>
+<span id="_CPPv3N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE"></span><span id="_CPPv2N10MGRadBndry13setBndryCondsERKN5amrex5BCRecERKN5amrex8GeometryERN5amrex7IntVectE"></span><span id="MGRadBndry::setBndryConds__amrex::BCRecCR.amrex::GeometryCR.amrex::IntVectR"></span><span class="target" id="classMGRadBndry_1a67ec5d58e120bdb09e2a231e979fb6b8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBndryConds</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">BCRec</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">phys_bc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Geometry</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">geom</span></span>, <a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">IntVect</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ratio</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -278,7 +275,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode">
-<span id="_CPPv3N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode"></span><span id="_CPPv2N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode"></span><span id="MGRadBndry::setBndryFluxConds__amrex::BCRecCR.BC_ModeC"></span><span class="target" id="classMGRadBndry_1a744ee0188e14b9d7d066a49dd3bfddea"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBndryFluxConds</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">BCRec</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">bc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="NGBndry_8H.html#_CPPv47BC_Mode" title="BC_Mode"><span class="n"><span class="pre">BC_Mode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">phys_bc_mode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="NGBndry_8H.html#_CPPv4N7BC_Mode16Inhomogeneous_BCE" title="Inhomogeneous_BC"><span class="n"><span class="pre">Inhomogeneous_BC</span></span></a><span class="sig-paren">)</span><br /></dt>
+<span id="_CPPv3N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode"></span><span id="_CPPv2N10MGRadBndry17setBndryFluxCondsERKN5amrex5BCRecEK7BC_Mode"></span><span id="MGRadBndry::setBndryFluxConds__amrex::BCRecCR.BC_ModeC"></span><span class="target" id="classMGRadBndry_1ac0dd3dba0321404e7819ab936aac5af2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setBndryFluxConds</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">BCRec</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">bc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="NGBndry_8H.html#_CPPv47BC_Mode" title="BC_Mode"><span class="n"><span class="pre">BC_Mode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">phys_bc_mode</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="NGBndry_8H.html#_CPPv4N7BC_Mode16Inhomogeneous_BCE" title="Inhomogeneous_BC"><span class="n"><span class="pre">Inhomogeneous_BC</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -291,7 +288,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE">
-<span id="_CPPv3NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE"></span><span id="_CPPv2NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE"></span><span id="MGRadBndry::mixedBndry__amrex::OrientationCRC"></span><span class="target" id="classMGRadBndry_1a500e5c6bf44cf523914bb64085cc4d44"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mixedBndry</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Orientation</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_face</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<span id="_CPPv3NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE"></span><span id="_CPPv2NK10MGRadBndry10mixedBndryERKN5amrex11OrientationE"></span><span id="MGRadBndry::mixedBndry__amrex::OrientationCRC"></span><span class="target" id="classMGRadBndry_1a8379f20e94aaa63fe3fa9750b4da44ba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mixedBndry</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Orientation</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_face</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>_face</strong> – </p>
@@ -401,7 +398,7 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE">
-<span id="_CPPv3NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE"></span><span id="_CPPv2NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE"></span><span id="MGRadBndryBld::call-operator__amrex::BoxArrayCR.amrex::DistributionMappingCR.i.amrex::GeometryCRC"></span><span class="target" id="classMGRadBndryBld_1a580d29d12af1c5108059a1b871cb0075"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../class/classNGBndry.html#_CPPv47NGBndry" title="NGBndry"><span class="n"><span class="pre">NGBndry</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">BoxArray</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_grids</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DistributionMapping</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_dmap</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_ngroups</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Geometry</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_geom</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
+<span id="_CPPv3NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE"></span><span id="_CPPv2NK13MGRadBndryBldclERKN5amrex8BoxArrayERKN5amrex19DistributionMappingEiRKN5amrex8GeometryE"></span><span id="MGRadBndryBld::call-operator__amrex::BoxArrayCR.amrex::DistributionMappingCR.i.amrex::GeometryCRC"></span><span class="target" id="classMGRadBndryBld_1ac2243dd6479be559b42b4e5fac8424c3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../class/classNGBndry.html#_CPPv47NGBndry" title="NGBndry"><span class="n"><span class="pre">NGBndry</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">BoxArray</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_grids</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DistributionMapping</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_dmap</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_ngroups</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="Castro__util_8H.html#_CPPv45amrex" title="amrex"><span class="n"><span class="pre">amrex</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Geometry</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">_geom</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -420,7 +417,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2018-2022, Castro development team.</p>
+    <p>&#169; Copyright 2018-2024, Castro development team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
