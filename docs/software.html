@@ -8,20 +8,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Software Design &mdash; Castro  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=e375baa2" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="_static/copybutton.js?v=eaa7b67c"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "macros": {"kth": "{{k_\\mathrm{th}}}", "gcc": "{\\mathrm{g~cm^{-3}}}", "cms": "{\\mathrm{cm~s^{-1}}}", "presunit": "{\\mathrm{dyn~cm^{-2}}}", "accelunit": "{\\mathrm{cm~s^{-2}}}", "ergg": "{\\mathrm{erg~g^{-1}}}", "Ab": "{{\\bf A}}", "eb": "{{\\bf e}}", "Fb": "{{\\bf F}}", "gb": "{{\\bf g}}", "Hb": "{{\\bf H}}", "ib": "{{\\bf i}}", "Ib": "{{\\bf I}}", "Kb": "{{\\bf K}}", "lb": "{{\\bf l}}", "Lb": "{{\\bf L}}", "nb": "{{\\bf n}}", "Pb": "{{\\bf P}}", "Qb": "{{\\bf Q}}", "rb": "{{\\bf r}}", "Rb": "{{\\bf R}}", "Sb": "{{\\bf S}}", "ub": "{{\\bf u}}", "Ub": "{{\\bf U}}", "xb": "{{\\bf x}}", "dt": "{\\Delta t}", "omegadot": "{\\dot\\omega}", "inp": "{{\\rm in}}", "outp": "{{\\rm out}}", "sync": "{{\\rm sync}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\half}", "nph": "{{n+\\myhalf}}", "kpp": "{\\ensuremath{\\kappa_{\\mathrm{P}}}}", "kpr": "{\\ensuremath{\\kappa_{\\mathrm{R}}}}", "kpf": "{\\ensuremath{\\kappa_{\\mathrm{F}}}}", "vb": "{\\boldsymbol{v}}", "vbt": "{\\widetilde{\\vb}}", "rbt": "{\\widetilde{\\rb}}", "ob": "{\\boldsymbol{\\omega}}", "nablab": "{\\boldsymbol{\\nabla}}", "avg": ["{{\\left \\langle #1 \\right \\rangle}}", 1]}}}</script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -101,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="regridding.html">Regridding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance Tips</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Castro reference</span></p>
 <ul>
@@ -132,6 +134,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
 </ul>
 
@@ -307,11 +310,11 @@ pointer to a data buffer. The real floating point data are stored as
 one-dimensional arrays in <code class="docutils literal notranslate"><span class="pre">FArrayBox</span></code> es. The associated <code class="docutils literal notranslate"><span class="pre">Box</span></code> can be
 used to reshape the 1D array into multi-dimensional arrays to be used
 by Fortran subroutines. The key part of the C++ AMReX data
-structures is that this data buffer can be cast a a DIM+1 dimensional array that
+structures is that this data buffer can be cast as a DIM+1 dimensional array that
 we can easily fill in C++ kernels.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Castro is complied for a specific dimensionality.</p>
+<p>Castro is compiled for a specific dimensionality.</p>
 </div>
 </section>
 <section id="multifab">
@@ -556,7 +559,7 @@ cells. You want to ensure that the ghost cells are filled
 difference is that for the <code class="docutils literal notranslate"><span class="pre">MultiFab</span></code> that will be the target
 of the ghost cell filling, we pass in a reference to the <code class="docutils literal notranslate"><span class="pre">StateData</span></code> itself.</p>
 <p>The main thing you need to be careful of here, is that you
-need to ensure that the the time you are at is consistent with
+need to ensure that the time you are at is consistent with
 the <code class="docutils literal notranslate"><span class="pre">StateData</span></code> ’s time. Here’s an example from the radiation
 portion of the code <code class="docutils literal notranslate"><span class="pre">MGFLDRadSolver.cpp</span></code>:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Real</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">castro</span><span class="o">-&gt;</span><span class="n">get_state_data</span><span class="p">(</span><span class="n">Rad_Type</span><span class="p">).</span><span class="n">curTime</span><span class="p">();</span>
@@ -568,7 +571,7 @@ portion of the code <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>In this example, <code class="docutils literal notranslate"><span class="pre">S_new</span></code> is a pointer to the new-time-level
 <code class="docutils literal notranslate"><span class="pre">State_Type</span></code> <code class="docutils literal notranslate"><span class="pre">MultiFab</span></code>. So this operation will use the
-<code class="docutils literal notranslate"><span class="pre">State_Type</span></code> data to fill its own ghost cells. we fill the
+<code class="docutils literal notranslate"><span class="pre">State_Type</span></code> data to fill its own ghost cells. We fill the
 <code class="docutils literal notranslate"><span class="pre">ngrow</span></code> ghost cells of the new-time-level <code class="docutils literal notranslate"><span class="pre">State_Type</span></code> data,
 for all the components.</p>
 <p>Note that in this example, because the <code class="docutils literal notranslate"><span class="pre">StateData</span></code> lives in the

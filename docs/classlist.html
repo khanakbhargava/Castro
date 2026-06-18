@@ -8,23 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Class list &mdash; Castro  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=e375baa2" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="_static/copybutton.js?v=eaa7b67c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Class Castro" href="class/classCastro.html" />
-    <link rel="prev" title="File vode_rhs_true_sdc.H" href="file/vode__rhs__true__sdc_8H.html" /> 
+    <link rel="prev" title="File timestep.H" href="file/timestep_8H.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -70,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="regridding.html">Regridding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance Tips</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Castro reference</span></p>
 <ul>
@@ -118,6 +120,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
 </ul>
 
@@ -240,7 +243,7 @@
 <li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro20read_particle_paramsEv"><code class="docutils literal notranslate"><span class="pre">read_particle_params()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro13check_for_nanERKN5amrex8MultiFabEi"><code class="docutils literal notranslate"><span class="pre">check_for_nan()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro23problem_post_simulationERN5amrex6VectorINSt10unique_ptrI8AmrLevelEEEE"><code class="docutils literal notranslate"><span class="pre">problem_post_simulation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro21reset_internal_energyERKN5amrex3BoxEKN5amrex6Array4IN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEE"><code class="docutils literal notranslate"><span class="pre">reset_internal_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro21reset_internal_energyERKN5amrex3BoxERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEE"><code class="docutils literal notranslate"><span class="pre">reset_internal_energy()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro14add_magnetic_eERN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">add_magnetic_e()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro16using_point_massEv"><code class="docutils literal notranslate"><span class="pre">using_point_mass()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classCastro.html#_CPPv4N6Castro14get_point_massEv"><code class="docutils literal notranslate"><span class="pre">get_point_mass()</span></code></a></li>
@@ -329,7 +332,7 @@
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity28average_fine_ec_onto_crse_ecEii"><code class="docutils literal notranslate"><span class="pre">average_fine_ec_onto_crse_ec()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity19make_radial_gravityEiN5amrex4RealER10RealVector"><code class="docutils literal notranslate"><span class="pre">make_radial_gravity()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4NK7Gravity25interpolate_monopole_gravEiR10RealVectorRN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">interpolate_monopole_grav()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4NK7Gravity19compute_radial_massERKN5amrex3BoxEKN5amrex6Array4IKN5amrex4RealEEER10RealVectorR10RealVectorR10RealVectorii"><code class="docutils literal notranslate"><span class="pre">compute_radial_mass()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4NK7Gravity19compute_radial_massERKN5amrex3BoxERKN5amrex6Array4IKN5amrex4RealEEER10RealVectorR10RealVectorR10RealVectorii"><code class="docutils literal notranslate"><span class="pre">compute_radial_mass()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity18fill_multipole_BCsEiiRKN5amrex6VectorIPN5amrex8MultiFabEEERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_multipole_BCs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4NK7Gravity19init_multipole_gravEv"><code class="docutils literal notranslate"><span class="pre">init_multipole_grav()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity19fill_direct_sum_BCsEiiRKN5amrex6VectorIPN5amrex8MultiFabEEERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_direct_sum_BCs()</span></code></a></li>
@@ -369,7 +372,7 @@
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity6NoSyncEv"><code class="docutils literal notranslate"><span class="pre">NoSync()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity21DoCompositeCorrectionEv"><code class="docutils literal notranslate"><span class="pre">DoCompositeCorrection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity22test_results_of_solvesEv"><code class="docutils literal notranslate"><span class="pre">test_results_of_solves()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity13test_residualERKN5amrex3BoxERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEEN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEEN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEEi"><code class="docutils literal notranslate"><span class="pre">test_residual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity13test_residualERKN5amrex3BoxERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEERKN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEEi"><code class="docutils literal notranslate"><span class="pre">test_residual()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity11test_solvesE"><code class="docutils literal notranslate"><span class="pre">test_solves</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity11mass_offsetE"><code class="docutils literal notranslate"><span class="pre">mass_offset</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="class/classGravity.html#_CPPv4N7Gravity12stencil_typeE"><code class="docutils literal notranslate"><span class="pre">stencil_type</span></code></a></li>
@@ -748,7 +751,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="file/vode__rhs__true__sdc_8H.html" class="btn btn-neutral float-left" title="File vode_rhs_true_sdc.H" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="file/timestep_8H.html" class="btn btn-neutral float-left" title="File timestep.H" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="class/classCastro.html" class="btn btn-neutral float-right" title="Class Castro" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -8,16 +8,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>File list &mdash; Castro  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=e375baa2" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="_static/copybutton.js?v=eaa7b67c"></script>
     <script src="_static/js/theme.js"></script>
@@ -70,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="regridding.html">Regridding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance Tips</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Castro reference</span></p>
 <ul>
@@ -107,7 +109,6 @@
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__math_8H.html">File Castro_math.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__mhd_8H.html">File Castro_mhd.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__react_8H.html">File Castro_react.H</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__react__util_8H.html">File Castro_react_util.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__rotation_8H.html">File Castro_rotation.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sdc_8H.html">File Castro_sdc.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sdc__util_8H.html">File Castro_sdc_util.H</a></li>
@@ -173,16 +174,18 @@
 <li class="toctree-l2"><a class="reference internal" href="file/runtime__parameters_8H.html">File runtime_parameters.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/sdc__cons__to__burn_8H.html">File sdc_cons_to_burn.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/sdc__newton__solve_8H.html">File sdc_newton_solve.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/sdc__powell__solve_8H.html">File sdc_powell_solve.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/sdc__react__util_8H.html">File sdc_react_util.H</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/sdc__vode__solve_8H.html">File sdc_vode_solve.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/slope_8H.html">File slope.H</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/timestep_8H.html">File timestep.H</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/vode__rhs__true__sdc_8H.html">File vode_rhs_true_sdc.H</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="classlist.html">Class list</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
 </ul>
 
@@ -344,7 +347,7 @@
 <li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro20read_particle_paramsEv"><code class="docutils literal notranslate"><span class="pre">read_particle_params()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro13check_for_nanERKN5amrex8MultiFabEi"><code class="docutils literal notranslate"><span class="pre">check_for_nan()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro23problem_post_simulationERN5amrex6VectorINSt10unique_ptrI8AmrLevelEEEE"><code class="docutils literal notranslate"><span class="pre">problem_post_simulation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro21reset_internal_energyERKN5amrex3BoxEKN5amrex6Array4IN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEE"><code class="docutils literal notranslate"><span class="pre">reset_internal_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro21reset_internal_energyERKN5amrex3BoxERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEE"><code class="docutils literal notranslate"><span class="pre">reset_internal_energy()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro14add_magnetic_eERN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">add_magnetic_e()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro16using_point_massEv"><code class="docutils literal notranslate"><span class="pre">using_point_mass()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Castro_8H.html#_CPPv4N6Castro14get_point_massEv"><code class="docutils literal notranslate"><span class="pre">get_point_mass()</span></code></a></li>
@@ -479,10 +482,9 @@
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__react_8H.html#_CPPv416do_new_reactions4Real4Real"><code class="docutils literal notranslate"><span class="pre">do_new_reactions()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__react_8H.html#_CPPv411react_stateRN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealEKi"><code class="docutils literal notranslate"><span class="pre">react_state()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__react_8H.html#_CPPv411react_stateN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">react_state()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__react_8H.html#_CPPv419valid_zones_to_burnRN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">valid_zones_to_burn()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__react_8H.html#_CPPv419valid_zones_to_burnRKN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">valid_zones_to_burn()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="file/Castro__react__util_8H.html">File Castro_react_util.H</a></li>
 <li class="toctree-l1"><a class="reference internal" href="file/Castro__rotation_8H.html">File Castro_rotation.H</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__rotation_8H.html#_CPPv429construct_old_rotation_sourceRN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_old_rotation_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__rotation_8H.html#_CPPv429construct_new_rotation_sourceRN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_new_rotation_source()</span></code></a></li>
@@ -510,9 +512,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="file/Castro__sdc__util_8H.html">File Castro_sdc_util.H</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv412NEWTON_SOLVE"><code class="docutils literal notranslate"><span class="pre">NEWTON_SOLVE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv410VODE_SOLVE"><code class="docutils literal notranslate"><span class="pre">VODE_SOLVE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv412HYBRID_SOLVE"><code class="docutils literal notranslate"><span class="pre">HYBRID_SOLVE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv411sdc_solvers"><code class="docutils literal notranslate"><span class="pre">sdc_solvers</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv4N11sdc_solvers6solverE"><code class="docutils literal notranslate"><span class="pre">solver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv4N11sdc_solvers6solver6newtonE"><code class="docutils literal notranslate"><span class="pre">newton</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv4N11sdc_solvers6solver4vodeE"><code class="docutils literal notranslate"><span class="pre">vode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv4N11sdc_solvers6solver15vode_and_newtonE"><code class="docutils literal notranslate"><span class="pre">vode_and_newton</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="file/Castro__sdc__util_8H.html#_CPPv4N11sdc_solvers6solver13hybrid_powellE"><code class="docutils literal notranslate"><span class="pre">hybrid_powell</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="file/Castro__sources_8H.html">File Castro_sources.H</a><ul>
@@ -533,17 +542,17 @@
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv424time_center_source_termsRN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">time_center_source_terms()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv427construct_old_sponge_sourceRN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_old_sponge_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv427construct_new_sponge_sourceRN5amrex8MultiFabERKN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_new_sponge_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv412apply_spongeRKN5amrex3BoxEKN5amrex6Array4IKN5amrex4RealEEEKN5amrex6Array4IN5amrex4RealEEEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">apply_sponge()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv412apply_spongeRKN5amrex3BoxERKN5amrex6Array4IKN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">apply_sponge()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv424construct_old_ext_sourceRN5amrex8MultiFabERKN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_old_ext_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv424construct_new_ext_sourceRN5amrex8MultiFabERKN5amrex8MultiFabERKN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_new_ext_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv415fill_ext_sourceKN5amrex4RealEKN5amrex4RealERKN5amrex8MultiFabERKN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_ext_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv427construct_old_thermo_sourceRN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_old_thermo_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv427construct_new_thermo_sourceRN5amrex8MultiFabERKN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_new_thermo_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv418fill_thermo_sourceRKN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_thermo_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv425construct_old_geom_sourceRN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_old_geom_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv425construct_new_geom_sourceRN5amrex8MultiFabERN5amrex8MultiFabERN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_new_geom_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv419fill_RZ_geom_sourceN5amrex4RealEN5amrex4RealERN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_RZ_geom_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv423fill_RTheta_geom_sourceN5amrex4RealEN5amrex4RealERN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_RTheta_geom_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv425construct_old_geom_sourceRN5amrex8MultiFabERKN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_old_geom_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv425construct_new_geom_sourceRN5amrex8MultiFabERKN5amrex8MultiFabERKN5amrex8MultiFabEN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">construct_new_geom_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv419fill_RZ_geom_sourceN5amrex4RealEN5amrex4RealERKN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_RZ_geom_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv423fill_RTheta_geom_sourceN5amrex4RealEN5amrex4RealERKN5amrex8MultiFabERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_RTheta_geom_source()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv421pre_advance_operatorsN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">pre_advance_operators()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv419pre_hydro_operatorsN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">pre_hydro_operators()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="file/Castro__sources_8H.html#_CPPv420post_hydro_operatorsN5amrex4RealEN5amrex4RealE"><code class="docutils literal notranslate"><span class="pre">post_hydro_operators()</span></code></a></li>
@@ -658,7 +667,7 @@
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity28average_fine_ec_onto_crse_ecEii"><code class="docutils literal notranslate"><span class="pre">average_fine_ec_onto_crse_ec()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity19make_radial_gravityEiN5amrex4RealER10RealVector"><code class="docutils literal notranslate"><span class="pre">make_radial_gravity()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4NK7Gravity25interpolate_monopole_gravEiR10RealVectorRN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">interpolate_monopole_grav()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4NK7Gravity19compute_radial_massERKN5amrex3BoxEKN5amrex6Array4IKN5amrex4RealEEER10RealVectorR10RealVectorR10RealVectorii"><code class="docutils literal notranslate"><span class="pre">compute_radial_mass()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4NK7Gravity19compute_radial_massERKN5amrex3BoxERKN5amrex6Array4IKN5amrex4RealEEER10RealVectorR10RealVectorR10RealVectorii"><code class="docutils literal notranslate"><span class="pre">compute_radial_mass()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity18fill_multipole_BCsEiiRKN5amrex6VectorIPN5amrex8MultiFabEEERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_multipole_BCs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4NK7Gravity19init_multipole_gravEv"><code class="docutils literal notranslate"><span class="pre">init_multipole_grav()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity19fill_direct_sum_BCsEiiRKN5amrex6VectorIPN5amrex8MultiFabEEERN5amrex8MultiFabE"><code class="docutils literal notranslate"><span class="pre">fill_direct_sum_BCs()</span></code></a></li>
@@ -698,7 +707,7 @@
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity6NoSyncEv"><code class="docutils literal notranslate"><span class="pre">NoSync()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity21DoCompositeCorrectionEv"><code class="docutils literal notranslate"><span class="pre">DoCompositeCorrection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity22test_results_of_solvesEv"><code class="docutils literal notranslate"><span class="pre">test_results_of_solves()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity13test_residualERKN5amrex3BoxERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEEN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEEN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEEi"><code class="docutils literal notranslate"><span class="pre">test_residual()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity13test_residualERKN5amrex3BoxERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex6Array4IN5amrex4RealEEERKN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEERKN5amrex8GpuArrayIN5amrex4RealE14AMREX_SPACEDIMEEi"><code class="docutils literal notranslate"><span class="pre">test_residual()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity11test_solvesE"><code class="docutils literal notranslate"><span class="pre">test_solves</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity11mass_offsetE"><code class="docutils literal notranslate"><span class="pre">mass_offset</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="file/Gravity_8H.html#_CPPv4N7Gravity12stencil_typeE"><code class="docutils literal notranslate"><span class="pre">stencil_type</span></code></a></li>
@@ -838,7 +847,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="file/MGutils_8H.html">File MGutils.H</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file/MGutils_8H.html#_CPPv412apply_metricRK3BoxK6Array4I4RealERK3BoxK6Array4I4RealERK3BoxK6Array4I4RealERK3Box8GpuArrayI4Real14AMREX_SPACEDIMEKi"><code class="docutils literal notranslate"><span class="pre">apply_metric()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/MGutils_8H.html#_CPPv412apply_metricRK3BoxRK6Array4I4RealERK3BoxRK6Array4I4RealERK3BoxRK6Array4I4RealERK3BoxRK8GpuArrayI4Real14AMREX_SPACEDIMERK8GpuArrayI4Real14AMREX_SPACEDIMEKi"><code class="docutils literal notranslate"><span class="pre">apply_metric()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="file/NGBndry_8H.html">File NGBndry.H</a><ul>
@@ -1282,17 +1291,30 @@
 <li class="toctree-l1"><a class="reference internal" href="file/runtime__parameters_8H.html">File runtime_parameters.H</a></li>
 <li class="toctree-l1"><a class="reference internal" href="file/sdc__cons__to__burn_8H.html">File sdc_cons_to_burn.H</a></li>
 <li class="toctree-l1"><a class="reference internal" href="file/sdc__newton__solve_8H.html">File sdc_newton_solve.H</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv46newton"><code class="docutils literal notranslate"><span class="pre">newton</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton14NEWTON_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">NEWTON_SUCCESS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton15SINGULAR_MATRIXE"><code class="docutils literal notranslate"><span class="pre">SINGULAR_MATRIX</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton19CONVERGENCE_FAILUREE"><code class="docutils literal notranslate"><span class="pre">CONVERGENCE_FAILURE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton18BAD_MASS_FRACTIONSE"><code class="docutils literal notranslate"><span class="pre">BAD_MASS_FRACTIONS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton25species_failure_toleranceE"><code class="docutils literal notranslate"><span class="pre">species_failure_tolerance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv413newton_status"><code class="docutils literal notranslate"><span class="pre">newton_status</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N13newton_status6statusE"><code class="docutils literal notranslate"><span class="pre">status</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N13newton_status6status7successE"><code class="docutils literal notranslate"><span class="pre">success</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N13newton_status6status15singular_matrixE"><code class="docutils literal notranslate"><span class="pre">singular_matrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N13newton_status6status19convergence_failureE"><code class="docutils literal notranslate"><span class="pre">convergence_failure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N13newton_status6status18bad_mass_fractionsE"><code class="docutils literal notranslate"><span class="pre">bad_mass_fractions</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv46newton"><code class="docutils literal notranslate"><span class="pre">newton</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton25species_failure_toleranceE"><code class="docutils literal notranslate"><span class="pre">species_failure_tolerance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton8MAX_ITERE"><code class="docutils literal notranslate"><span class="pre">MAX_ITER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="file/sdc__newton__solve_8H.html#_CPPv4N6newton8MAX_NSUBE"><code class="docutils literal notranslate"><span class="pre">MAX_NSUB</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="file/sdc__powell__solve_8H.html">File sdc_powell_solve.H</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file/sdc__powell__solve_8H.html#_CPPv46powell"><code class="docutils literal notranslate"><span class="pre">powell</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="file/sdc__react__util_8H.html">File sdc_react_util.H</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file/sdc__vode__solve_8H.html">File sdc_vode_solve.H</a></li>
 <li class="toctree-l1"><a class="reference internal" href="file/slope_8H.html">File slope.H</a></li>
 <li class="toctree-l1"><a class="reference internal" href="file/timestep_8H.html">File timestep.H</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="file/timestep_8H.html#_CPPv48timestep"><code class="docutils literal notranslate"><span class="pre">timestep</span></code></a><ul>
@@ -1309,7 +1331,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="file/vode__rhs__true__sdc_8H.html">File vode_rhs_true_sdc.H</a></li>
 </ul>
 </div>
 </section>
