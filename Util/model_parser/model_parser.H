@@ -307,7 +307,7 @@ void establish_hse (Real& mass_want, Real& central_density_want, Real& radius,
         // delta is the input parameter which will determine the width of the transition
         bool smooth = delta > 0.0_rt && envelope_mass > 0.0_rt && mass_want > 0.0_rt;
 
-        // mass to decide where to start the transition 
+        // mass to decide where to start the transition
         Real transition_mass = mass_want - envelope_mass;
         Real transition_mass_lo = 0.0_rt;
 
@@ -348,7 +348,7 @@ void establish_hse (Real& mass_want, Real& central_density_want, Real& radius,
 
                 rl += dx;
                 rr += dx;
-                
+
                 // As the initial guess for the density, use the underlying zone.
 
                 model.state(i, model::idens) = model.state(i-1, model::idens);
@@ -382,7 +382,7 @@ void establish_hse (Real& mass_want, Real& central_density_want, Real& radius,
                             eos_state.xn[n] = model.state(i, model::ispec + n);
                         }
                     }
-                } 
+                }
                 // retaining the original sharp transition option
                 else {
                     if (mass_want > 0.0_rt && M_enclosed >= mass_want - envelope_mass) {
